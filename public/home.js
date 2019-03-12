@@ -39,7 +39,7 @@ $(function () {
             type: "GET",
             url: "/api/rooms/" + roomId + "/messages",
         }).success(function (data) {
-            $("#roomName").text("Messages for " + data.room.name);
+            $("#roomName").text("Messages");
             var messages = "";
             $.each(data.messages, function (key, message) {
                 messages += message.text + "\r";

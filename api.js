@@ -4,13 +4,20 @@ var messages = require("./data/messages.json");
 var _ = require("lodash");
 var uuid = require("node-uuid");
 var users = require("./data/users.json");
+var chatDB = require('./data/chatDB');
 
 var router = express.Router();
 module.exports = router;
 
 router.get("/rooms", function (req, res) {
-  res.json(rooms);
-});
+
+  chatDB.connectMongoose
+  .then(()=>chatDB.Room.find().exec())
+  .then(function(rooms){
+      res.json(rooms);
+    });
+  });
+
 
 router.route("/rooms/:roomId/messages")
   .get(function (req, res) {
